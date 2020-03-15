@@ -3,6 +3,7 @@
 import { app, BrowserWindow } from 'electron'
 import registerWorker from './register.js'
 
+const DELAY = 3000
 const path = require('path')
 const isDev = require('electron-is-dev')
 
@@ -19,9 +20,6 @@ function createMainWindow() {
 
   if (isDev) {
     window.webContents.openDevTools()
-  }
-
-  if (isDev) {
     window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
   }
   else {
@@ -54,12 +52,18 @@ app.on('activate', () => {
   // on macOS it is common to re-create a window even after all windows have been closed
   if (mainWindow === null) {
     mainWindow = createMainWindow()
-    registerWorker()
+    // we use delay to be sure that an error appears only after worker is called
+    setTimeout(() => {
+      registerWorker()
+    }, DELAY)
   }
 })
 
 // create main BrowserWindow when electron is ready
 app.on('ready', () => {
   mainWindow = createMainWindow()
-  registerWorker()
+  // we use delay to be sure that an error appears only after worker is called
+  setTimeout(() => {
+    registerWorker()
+  }, DELAY)
 })
