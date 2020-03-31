@@ -14,8 +14,10 @@
     "productName": "Threads plugin bundle issue",
     "generateUpdatesFilesForAllChannels": true,
     "asarUnpack": [
-      "dist/main/0.bundle.worker.js",
-      "dist/main/0.bundle.worker.js.map"
+      "dist/main/*.worker.js*",
+      "node_modules/source-map/**/*",
+      "node_modules/source-map-support/**/*",
+      "node_modules/buffer-from/**/*"
     ],
     "files": [
       "dist/**/*",
@@ -33,10 +35,10 @@
     }
   },
   "dependencies": {
-    "threads": "1.0.2",
-    "threads-plugin": "1.3.0",
-    "source-map-support": "0.5.12",
-    "electron-is-dev": "1.1.0"
+    "threads": "1.3.1-asar.unpack",
+    "threads-plugin": "1.3.1",
+    "electron-is-dev": "1.1.0",
+    "source-map-support": "0.5.12"
   },
   "devDependencies": {
     "electron": "7.1.14",
